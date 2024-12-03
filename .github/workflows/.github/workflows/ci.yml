@@ -18,7 +18,10 @@ jobs:
         with:
           java-version: '11'
 
-      - name: Compile and Test
+      - name: Compile Code
         run: |
-          javac LoginApp.java
-          echo "No automated tests detected. Add test framework if needed."
+          javac LoginApp.java LoginAppTest.java
+
+      - name: Run Tests
+        run: |
+          java -cp .:junit-4.13.2.jar:hamcrest-core-1.3.jar org.junit.runner.JUnitCore LoginAppTest
