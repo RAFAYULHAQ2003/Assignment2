@@ -1,0 +1,27 @@
+name: Java CI Pipeline
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          java-version: '11'
+
+      - name: Compile Code
+        run: |
+          javac LoginApp.java LoginAppTest.java
+
+      - name: Run Tests
+        run: |
+          java -cp .:junit-4.13.2.jar:hamcrest-core-1.3.jar org.junit.runner.JUnitCore LoginAppTest
